@@ -50,10 +50,10 @@ namespace WindowsFormsAirTraffic
             Application.Exit();
         }
 
-        /*private void btnAddCountry_Click(object sender, EventArgs e)
+        private void btnAddCountry_Click(object sender, EventArgs e)
         {
             FormAddCountry FormAddCountry = new FormAddCountry(this);
             FormAddCountry.Show();
-        }*/
+        }
     }
 }
