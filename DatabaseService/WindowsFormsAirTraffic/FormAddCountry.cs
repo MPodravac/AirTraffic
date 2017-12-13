@@ -10,10 +10,12 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAirTraffic
 {
-    public partial class Form1 : Form
+    public partial class FormAddCountry : Form
     {
-        public Form1()
+        private readonly MainForm FormCountriesList;
+        public FormAddCountry(MainForm FormCountries)
         {
+            FormCountriesList = FormCountries;
             InitializeComponent();
         }
     }
