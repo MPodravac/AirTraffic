@@ -86,7 +86,7 @@
             this.tabControl1.Location = new System.Drawing.Point(22, 44);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(584, 249);
+            this.tabControl1.Size = new System.Drawing.Size(585, 250);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -128,7 +128,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(576, 223);
+            this.tabPage4.Size = new System.Drawing.Size(577, 224);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Admin";
             this.tabPage4.UseVisualStyleBackColor = true;
