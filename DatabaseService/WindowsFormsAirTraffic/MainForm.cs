@@ -54,7 +54,7 @@ namespace WindowsFormsAirTraffic
         private void btnAddCountry_Click(object sender, EventArgs e)
         {
             Country oCountry = new Country();
-            string sCountry = (string)comboBoxCountries.SelectedItem;
+            oCountry.sCountryName = (string)comboBoxCountries.SelectedItem;
             Crud Crud = new Crud();
             Crud.AddCountry(oCountry);
         }
@@ -62,7 +62,7 @@ namespace WindowsFormsAirTraffic
         private void btnDeleteCountry_Click(object sender, EventArgs e)
         {
             Country oCountry = new Country();
-            string sCountry = (string)comboBoxCountries.SelectedItem;
+            oCountry.sCountryName = (string)comboBoxCountries.SelectedItem;
             Crud Crud = new Crud();
             Crud.DeleteCountry(oCountry);
         }
