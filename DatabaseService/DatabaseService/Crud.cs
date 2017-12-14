@@ -11,7 +11,7 @@ namespace DatabaseService
 {
     public class Crud
     {
-       public List <Country> GetAllCountries()
+       public List <Country> GetAvailableCountries()
         {
             List<Country> lAirTrafficCountries = new List<Country>();
             String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
@@ -59,22 +59,6 @@ namespace DatabaseService
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())
                 {
-                }
-            }
-        }
-
-        public void UpdateCountry(Country oCountry)
-        {
-            String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
-            {
-                using (DbCommand oCommand = oConnection.CreateCommand()) 
-                {
-                    oCommand.CommandText = "UPDATE AIRTRAFFIC_COUNTRIES SET COUNTRY_NAME = '" + oCountry.sCountryName + "' WHERE COUNTRY_ID = " + oCountry.nCountryID;
-                    oConnection.Open();
-                    using (DbDataReader oReader = oCommand.ExecuteReader())
-                    {
-                    }
                 }
             }
         }

@@ -78,5 +78,21 @@ namespace RESTFlights
             }
             return lRESTFlights;
         }
+        public List<String>GetAllCountries()
+        {
+            string sName;
+            List<String> lAllCountries = new List<String>();
+            string sUrl = System.Configuration.ConfigurationManager.AppSettings["RestApiUrl2"];
+            string sJson = CallRestMethod(sUrl);
+
+            JArray json = JArray.Parse(sJson);
+            foreach (JObject item in json)
+            {
+                string name = (string)item.GetValue("name");
+
+                lAllCountries.Add(sName = name);
+            }
+            return lAllCountries;
+        }
     }
 }

@@ -18,14 +18,15 @@ namespace WindowsFormsAirTraffic
     
     public partial class MainForm : Form
     {
-        public List<Country> lCountries;
-        Crud Crud = new Crud();
+        public List<String> lCountries;
+        Rest Rest = new Rest();
         public MainForm()
         {
             InitializeComponent();
-            lCountries = Crud.GetAllCountries();
-            List<String> lAllCountries = lCountries.Where(o => o.sCountryName != "").Select(o => o.sCountryName).Distinct().ToList();
+            lCountries = Rest.GetAllCountries();
+            List<String> lAllCountries = lCountries.ToList();
             lAllCountries.Insert(0, "Sve države");
+
             comboBoxCountries.DataSource = lAllCountries;
         }
 
@@ -33,11 +34,11 @@ namespace WindowsFormsAirTraffic
         {
             string sCountry = (string)comboBoxCountries.SelectedItem;
 
-            lCountries = Crud.GetAllCountries();
+            lCountries = Rest.GetAllCountries();
             if (sCountry != "Sve države")
             {
-                lCountries = lCountries.Where(o => o.sCountryName == sCountry).ToList();
-                comboBoxCountries.DataSource = lCountries;
+                lCountries = lCountries.ToList();
+                //comboBoxCountries.DataSource = lCountries;
             }
             else
             {
@@ -52,8 +53,18 @@ namespace WindowsFormsAirTraffic
 
         private void btnAddCountry_Click(object sender, EventArgs e)
         {
-            FormAddCountry FormAddCountry = new FormAddCountry(this);
-            FormAddCountry.Show();
+            Country oCountry = new Country();
+            string sCountry = (string)comboBoxCountries.SelectedItem;
+            Crud Crud = new Crud();
+            Crud.AddCountry(oCountry);
+        }
+
+        private void btnDeleteCountry_Click(object sender, EventArgs e)
+        {
+            Country oCountry = new Country();
+            string sCountry = (string)comboBoxCountries.SelectedItem;
+            Crud Crud = new Crud();
+            Crud.DeleteCountry(oCountry);
         }
     }
 }
