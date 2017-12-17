@@ -30,51 +30,45 @@ namespace RESTFlights
 
         public List<Flight> GetFlights()
         {
+            Crud Crud = new Crud();
+            List<Country> lCountries;
+            lCountries = Crud.GetAvailableCountries();
+
             List<Flight> lRESTFlights = new List<Flight>();
             string sUrl = System.Configuration.ConfigurationManager.AppSettings["RestApiUrl"];
             string sJson = CallRestMethod(sUrl);
 
-            JArray json = JArray.Parse(sJson);
-            foreach (JObject item in json)
-            {
-                string icao = (string)item.GetValue("icao24");
-                string callsign = (string)item.GetValue("callsign");
-                string country = (string)item.GetValue("origin_country");
-                int timeposition = (int)item.GetValue("time_position");
-                int lastcontact = (int)item.GetValue("last_contact");
-                float longitude = (float)item.GetValue("longitude");
-                float latitude = (float)item.GetValue("latitude");
-                float geoaltitude = (float)item.GetValue("geo_altitude");
-                bool onground = (bool)item.GetValue("on_ground");
-                float velocity = (float)item.GetValue("velocity");
-                float heading = (float)item.GetValue("heading");
-                float verticalrate = (float)item.GetValue("vertical_rate");
-                int sensors = (int)item.GetValue("sensors");
-                float baroaltitude = (float)item.GetValue("baro_altitude");
-                string squawk = (string)item.GetValue("squawk");
-                bool spi = (bool)item.GetValue("api");
-                int positionsource = (int)item.GetValue("position_source");
+            JObject json = JObject.Parse(sJson);
+            var oFlights = json["states"].ToList();
 
-                lRESTFlights.Add(new Flight
+            for (int i = 0; i < oFlights.Count; i++)
+            {
+                for (int j = 0; j < lCountries.Count; j++)
                 {
-                    sIcao24 = icao,
-                    sCallSign = callsign,
-                    sCountry = country,
-                    nTimePosition = timeposition,
-                    nLastContact = lastcontact,
-                    fLongitude = longitude,
-                    fLatitude = latitude,
-                    fGeoAltitude = geoaltitude,
-                    bOnGround = onground,
-                    fVelocity = velocity,
-                    fHeading = heading,
-                    fVerticalRate = verticalrate,
-                    nSensors = sensors,
-                    fBaroAltitude = baroaltitude,
-                    sSquawk = squawk,
-                    bSpi = spi,
-                    nPositionSource =positionsource,
-                });
+                    if (lCountries[j].sCountryName == (string)oFlights[i][2])
+                    {
+                        lRESTFlights.Add(new Flight
+                        {
+                            sIcao24 = (string)oFlights[i][0],
+                            sCallSign = (string)oFlights[i][1],
+                            sCountry = (string)oFlights[i][2],
+                            //nTimePosition = (int)oFlights[i][3],
+                            //nLastContact = (int)oFlights[i][4],
+                            //fLongitude = (float)oFlights[i][5],
+                            //fLatitude = (float)oFlights[i][6],
+                            //fGeoAltitude = (float)oFlights[i][7],
+                            bOnGround = (bool)oFlights[i][8],
+                            //fVelocity = (float)oFlights[i][9],
+                            //fHeading = (float)oFlights[i][10],
+                            //fVerticalRate = (float)oFlights[i][11],
+                            //nSensors = (int)oFlights[i][12],
+                            //fBaroAltitude = (float)oFlights[i][13],
+                            sSquawk = (string)oFlights[i][14],
+                            bSpi = (bool)oFlights[i][15],
+                            //nPositionSource = (int)oFlights[i][16],
+                        });
+                    }
+                }
             }
             return lRESTFlights;
         }

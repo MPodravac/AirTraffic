@@ -19,15 +19,22 @@ namespace WindowsFormsAirTraffic
     public partial class MainForm : Form
     {
         public List<String> lCountries;
+        public List<Flight> lFlights;
         Rest Rest = new Rest();
+
         public MainForm()
         {
             InitializeComponent();
+
             lCountries = Rest.GetAllCountries();
             List<String> lAllCountries = lCountries.ToList();
             lAllCountries.Insert(0, "Sve države");
 
             comboBoxCountries.DataSource = lAllCountries;
+
+            //DATA GRID
+            lFlights = Rest.GetFlights();
+            dataGridViewFlights.DataSource = lFlights;
         }
 
         private void comboBoxCountries_SelectedIndexChanged(object sender, EventArgs e)
