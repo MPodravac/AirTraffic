@@ -35,19 +35,20 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridViewFlights = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.btnDeleteCountry = new System.Windows.Forms.Button();
+            this.dataGridViewCountries = new System.Windows.Forms.DataGridView();
             this.btnAddCountry = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCountries = new System.Windows.Forms.ComboBox();
-            this.dataGridViewFlights = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -103,12 +104,20 @@
             this.tabPage1.Text = "Live AirTraffic (table)";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewFlights
+            // 
+            this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFlights.Location = new System.Drawing.Point(61, 25);
+            this.dataGridViewFlights.Name = "dataGridViewFlights";
+            this.dataGridViewFlights.Size = new System.Drawing.Size(720, 294);
+            this.dataGridViewFlights.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(577, 224);
+            this.tabPage2.Size = new System.Drawing.Size(850, 339);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "History AirTraffic (geo)";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -118,38 +127,37 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(577, 224);
+            this.tabPage3.Size = new System.Drawing.Size(850, 339);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "History AirTraffic (table)";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.btnDeleteCountry);
+            this.tabPage4.Controls.Add(this.dataGridViewCountries);
             this.tabPage4.Controls.Add(this.btnAddCountry);
             this.tabPage4.Controls.Add(this.label1);
             this.tabPage4.Controls.Add(this.comboBoxCountries);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(577, 224);
+            this.tabPage4.Size = new System.Drawing.Size(850, 339);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Admin";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteCountry
+            // dataGridViewCountries
             // 
-            this.btnDeleteCountry.Location = new System.Drawing.Point(104, 87);
-            this.btnDeleteCountry.Name = "btnDeleteCountry";
-            this.btnDeleteCountry.Size = new System.Drawing.Size(75, 40);
-            this.btnDeleteCountry.TabIndex = 3;
-            this.btnDeleteCountry.Text = "Obriši državu";
-            this.btnDeleteCountry.UseVisualStyleBackColor = true;
-            this.btnDeleteCountry.Click += new System.EventHandler(this.btnDeleteCountry_Click);
+            this.dataGridViewCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCountries.Location = new System.Drawing.Point(208, 37);
+            this.dataGridViewCountries.Name = "dataGridViewCountries";
+            this.dataGridViewCountries.Size = new System.Drawing.Size(596, 274);
+            this.dataGridViewCountries.TabIndex = 4;
+            this.dataGridViewCountries.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCountries_CellContentClick);
             // 
             // btnAddCountry
             // 
-            this.btnAddCountry.Location = new System.Drawing.Point(23, 87);
+            this.btnAddCountry.Location = new System.Drawing.Point(36, 80);
             this.btnAddCountry.Name = "btnAddCountry";
             this.btnAddCountry.Size = new System.Drawing.Size(75, 40);
             this.btnAddCountry.TabIndex = 2;
@@ -175,14 +183,6 @@
             this.comboBoxCountries.TabIndex = 0;
             this.comboBoxCountries.SelectedIndexChanged += new System.EventHandler(this.comboBoxCountries_SelectedIndexChanged);
             // 
-            // dataGridViewFlights
-            // 
-            this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewFlights.Location = new System.Drawing.Point(124, 39);
-            this.dataGridViewFlights.Name = "dataGridViewFlights";
-            this.dataGridViewFlights.Size = new System.Drawing.Size(720, 294);
-            this.dataGridViewFlights.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,9 +197,10 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,11 +217,11 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Button btnDeleteCountry;
         private System.Windows.Forms.Button btnAddCountry;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxCountries;
         private System.Windows.Forms.DataGridView dataGridViewFlights;
+        private System.Windows.Forms.DataGridView dataGridViewCountries;
     }
 }
 
