@@ -44,7 +44,7 @@ namespace WindowsFormsAirTraffic
 
             //dodavanje buttona u kolonu
             DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
-            oDeleteButton.Image = Image.FromFile("C:/Users/Korisnik/Documents/remove.png");
+            oDeleteButton.Image = Image.FromFile("C:/Users/student/Downloads/if_remove-01_186389.png");
             oDeleteButton.Width = 20;
             oDeleteButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCountries.Columns.Add(oDeleteButton);
