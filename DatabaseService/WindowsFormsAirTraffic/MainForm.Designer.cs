@@ -43,10 +43,14 @@
             this.btnAddCountry = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCountries = new System.Windows.Forms.ComboBox();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gMapAirTraffic = new GMap.NET.WindowsForms.GMapControl();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +61,7 @@
             this.izbornikToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(892, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(962, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -106,14 +110,19 @@
             // 
             // dataGridViewFlights
             // 
+            this.dataGridViewFlights.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewFlights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFlights.Location = new System.Drawing.Point(61, 25);
             this.dataGridViewFlights.Name = "dataGridViewFlights";
-            this.dataGridViewFlights.Size = new System.Drawing.Size(720, 294);
+            this.dataGridViewFlights.Size = new System.Drawing.Size(783, 308);
             this.dataGridViewFlights.TabIndex = 0;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.gMapAirTraffic);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -148,7 +157,13 @@
             // 
             // dataGridViewCountries
             // 
+            this.dataGridViewCountries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCountries.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
             this.dataGridViewCountries.Location = new System.Drawing.Point(208, 37);
             this.dataGridViewCountries.Name = "dataGridViewCountries";
             this.dataGridViewCountries.Size = new System.Drawing.Size(596, 274);
@@ -183,21 +198,61 @@
             this.comboBoxCountries.TabIndex = 0;
             this.comboBoxCountries.SelectedIndexChanged += new System.EventHandler(this.comboBoxCountries_SelectedIndexChanged);
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "nCountryID";
+            this.Column1.HeaderText = "ID države";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "sCountryName";
+            this.Column2.HeaderText = "Država";
+            this.Column2.Name = "Column2";
+            // 
+            // gMapAirTraffic
+            // 
+            this.gMapAirTraffic.Bearing = 0F;
+            this.gMapAirTraffic.CanDragMap = true;
+            this.gMapAirTraffic.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gMapAirTraffic.GrayScaleMode = false;
+            this.gMapAirTraffic.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gMapAirTraffic.LevelsKeepInMemmory = 5;
+            this.gMapAirTraffic.Location = new System.Drawing.Point(42, 26);
+            this.gMapAirTraffic.MarkersEnabled = true;
+            this.gMapAirTraffic.MaxZoom = 18;
+            this.gMapAirTraffic.MinZoom = 2;
+            this.gMapAirTraffic.MouseWheelZoomEnabled = true;
+            this.gMapAirTraffic.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapAirTraffic.Name = "gMapAirTraffic";
+            this.gMapAirTraffic.NegativeMode = false;
+            this.gMapAirTraffic.PolygonsEnabled = true;
+            this.gMapAirTraffic.RetryLoadTile = 0;
+            this.gMapAirTraffic.RoutesEnabled = true;
+            this.gMapAirTraffic.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapAirTraffic.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapAirTraffic.ShowTileGridLines = false;
+            this.gMapAirTraffic.Size = new System.Drawing.Size(709, 287);
+            this.gMapAirTraffic.TabIndex = 0;
+            this.gMapAirTraffic.Zoom = 13D;
+            this.gMapAirTraffic.Load += new System.EventHandler(this.gMapAirTraffic_Load);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 421);
+            this.ClientSize = new System.Drawing.Size(962, 456);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "AirTraffic";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).EndInit();
@@ -222,6 +277,9 @@
         private System.Windows.Forms.ComboBox comboBoxCountries;
         private System.Windows.Forms.DataGridView dataGridViewFlights;
         private System.Windows.Forms.DataGridView dataGridViewCountries;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private GMap.NET.WindowsForms.GMapControl gMapAirTraffic;
     }
 }
 

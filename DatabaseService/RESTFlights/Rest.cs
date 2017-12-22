@@ -61,7 +61,6 @@ namespace RESTFlights
                             fVelocity = (float)(oFlights[i][9].Type == JTokenType.Null ? -1: oFlights[i][9]),
                             fHeading = (float)(oFlights[i][10].Type == JTokenType.Null ? -1 : oFlights[i][10]),
                             fVerticalRate = (float)(oFlights[i][11].Type == JTokenType.Null ? -1 : oFlights[i][11]),
-                            nSensors = (int)(oFlights[i][12].Type == JTokenType.Null ? -1 : oFlights[i][12]),
                             fBaroAltitude = (float)(oFlights[i][13].Type == JTokenType.Null ? -1 : oFlights[i][13]),
                             sSquawk = (string)oFlights[i][14],
                             bSpi = (bool)oFlights[i][15],

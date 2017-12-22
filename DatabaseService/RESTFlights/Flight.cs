@@ -20,7 +20,6 @@ namespace RESTFlights
         public float fVelocity { get; set; }
         public float fHeading { get; set; }
         public float fVerticalRate { get; set; }
-        public int nSensors { get; set; }
         public float fBaroAltitude { get; set; }
         public string sSquawk { get; set; }
         public bool bSpi { get; set; }

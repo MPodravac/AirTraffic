@@ -11,7 +11,10 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using DatabaseService;
 using RESTFlights;
-
+using GMap.NET;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using GMap.NET.MapProviders;
 
 namespace WindowsFormsAirTraffic
 {
@@ -44,7 +47,7 @@ namespace WindowsFormsAirTraffic
 
             //dodavanje buttona u kolonu
             DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
-            oDeleteButton.Image = Image.FromFile("C:/Users/student/Downloads/if_remove-01_186389.png");
+            oDeleteButton.Image = Image.FromFile("C:/Users/Korisnik/Documents/remove.png");
             oDeleteButton.Width = 20;
             oDeleteButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCountries.Columns.Add(oDeleteButton);
@@ -97,6 +100,25 @@ namespace WindowsFormsAirTraffic
                 Crud.DeleteCountry(oCountry);
             }
             dataGridViewCountries.DataSource = Crud.GetAvailableCountries();
+        }
+
+        private void gMapAirTraffic_Load(object sender, EventArgs e)
+        {
+            gMapAirTraffic.MapProvider = GMap.NET.MapProviders.GoogleHybridMapProvider.Instance;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
+            gMapAirTraffic.SetPositionByKeywords("Croatia");
+            gMapAirTraffic.ShowCenter = false;
+
+            GMapOverlay markers = new GMapOverlay("markers");
+            GMapMarker marker = new GMarkerGoogle(
+                new PointLatLng(45.831646, 17.385543),
+                GMarkerGoogleType.red_dot);
+            GMapMarker marker2 = new GMarkerGoogle(
+                new PointLatLng(45.70333, 17.70278),
+                GMarkerGoogleType.blue_dot);
+            markers.Markers.Add(marker);
+            markers.Markers.Add(marker2);
+            gMapAirTraffic.Overlays.Add(markers);
         }
     }
 }
