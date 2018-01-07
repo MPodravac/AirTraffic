@@ -24,6 +24,7 @@ namespace WindowsFormsAirTraffic
         public List<String> lCountries;
         public List<Flight> lFlights;
         public List<Country> lAvCountries;
+        public List<Flight> lSetFlights;
         Rest Rest = new Rest();
         Crud Crud = new Crud();
 
@@ -47,7 +48,7 @@ namespace WindowsFormsAirTraffic
 
             //dodavanje buttona u kolonu
             DataGridViewImageColumn oDeleteButton = new DataGridViewImageColumn();
-            oDeleteButton.Image = Image.FromFile("C:/Users/Korisnik/Documents/remove.png");
+            oDeleteButton.Image = Image.FromFile("remove.png");
             oDeleteButton.Width = 20;
             oDeleteButton.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCountries.Columns.Add(oDeleteButton);
@@ -92,7 +93,7 @@ namespace WindowsFormsAirTraffic
         {
             dataGridViewCountries.Rows[e.RowIndex].Selected = true;
 
-            if (dataGridViewCountries.CurrentCell.ColumnIndex.Equals(2) && e.RowIndex != -1) // ako mi je moja trenuta celija ( index =5--broj kolone ) i ako index retka nije -1(mora biti index) nesto napravi
+            if (dataGridViewCountries.CurrentCell.ColumnIndex.Equals(2) && e.RowIndex != -1) 
             {
                 Country oCountry = new Country();
                 oCountry.nCountryID = Convert.ToInt32(dataGridViewCountries.Rows[e.RowIndex].Cells[0].Value);
@@ -104,21 +105,36 @@ namespace WindowsFormsAirTraffic
 
         private void gMapAirTraffic_Load(object sender, EventArgs e)
         {
+            lSetFlights = Rest.GetFlights();
+
             gMapAirTraffic.MapProvider = GMap.NET.MapProviders.GoogleHybridMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gMapAirTraffic.SetPositionByKeywords("Croatia");
+            gMapAirTraffic.SetPositionByKeywords("Europe");
             gMapAirTraffic.ShowCenter = false;
+            gMapAirTraffic.DragButton = MouseButtons.Left;
 
             GMapOverlay markers = new GMapOverlay("markers");
-            GMapMarker marker = new GMarkerGoogle(
+            for(int i=0; i<lSetFlights.Count;i++)
+            {
+                GMapMarker marker = new GMarkerGoogle(
+                new PointLatLng(lSetFlights[i].fLatitude, lSetFlights[i].fLongitude),
+                new Bitmap("plane.png"));
+                markers.Markers.Add(marker);
+            }
+            /*GMapMarker marker = new GMarkerGoogle(
                 new PointLatLng(45.831646, 17.385543),
                 GMarkerGoogleType.red_dot);
             GMapMarker marker2 = new GMarkerGoogle(
                 new PointLatLng(45.70333, 17.70278),
                 GMarkerGoogleType.blue_dot);
             markers.Markers.Add(marker);
-            markers.Markers.Add(marker2);
+           markers.Markers.Add(marker2);*/
             gMapAirTraffic.Overlays.Add(markers);
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Created by Mateja Podravac" + Environment.NewLine + "VSMTI, 2017.");
         }
     }
 }
