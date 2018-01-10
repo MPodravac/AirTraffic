@@ -15,6 +15,8 @@ using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.MapProviders;
+using System.Threading;
+using System.Configuration;
 
 namespace WindowsFormsAirTraffic
 {
@@ -24,7 +26,6 @@ namespace WindowsFormsAirTraffic
         public List<String> lCountries;
         public List<Flight> lFlights;
         public List<Country> lAvCountries;
-        public List<Flight> lSetFlights;
         Rest Rest = new Rest();
         Crud Crud = new Crud();
 
@@ -105,36 +106,82 @@ namespace WindowsFormsAirTraffic
 
         private void gMapAirTraffic_Load(object sender, EventArgs e)
         {
-            lSetFlights = Rest.GetFlights();
+            lFlights = Rest.GetFlights();
 
             gMapAirTraffic.MapProvider = GMap.NET.MapProviders.GoogleHybridMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
-            gMapAirTraffic.SetPositionByKeywords("Europe");
             gMapAirTraffic.ShowCenter = false;
             gMapAirTraffic.DragButton = MouseButtons.Left;
 
-            GMapOverlay markers = new GMapOverlay("markers");
-            for(int i=0; i<lSetFlights.Count;i++)
-            {
-                GMapMarker marker = new GMarkerGoogle(
-                new PointLatLng(lSetFlights[i].fLatitude, lSetFlights[i].fLongitude),
-                new Bitmap("plane.png"));
-                markers.Markers.Add(marker);
-            }
-            /*GMapMarker marker = new GMarkerGoogle(
-                new PointLatLng(45.831646, 17.385543),
-                GMarkerGoogleType.red_dot);
-            GMapMarker marker2 = new GMarkerGoogle(
-                new PointLatLng(45.70333, 17.70278),
-                GMarkerGoogleType.blue_dot);
-            markers.Markers.Add(marker);
-           markers.Markers.Add(marker2);*/
-            gMapAirTraffic.Overlays.Add(markers);
+            SetFlightsOnMap();
         }
 
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Created by Mateja Podravac" + Environment.NewLine + "VSMTI, 2017.");
         }
+
+        private void SetFlightsOnMap()
+        {
+            lFlights = Rest.GetFlights();
+
+            GMapOverlay markers = new GMapOverlay("markers");
+            for (int i = 0; i < lFlights.Count; i++)
+            {
+                GMapMarker marker = new GMarkerGoogle(
+                new PointLatLng(lFlights[i].fLatitude, lFlights[i].fLongitude),
+                new Bitmap("plane.png"));
+                markers.Markers.Add(marker);
+            }
+            gMapAirTraffic.Overlays.Add(markers);
+        }
+
+       /* public void ScheduleService()
+        {
+            // Objekt klase Timer
+            System.Threading.Timer Schedular = new System.Threading.Timer(new TimerCallback(SchedularCallback));
+            // Postavljanje vremena 'po defaultu'
+            DateTime scheduledTime = DateTime.MinValue;
+            string mode = ConfigurationManager.AppSettings["Mode"].ToUpper();
+            if (mode == "DAILY")
+            {
+                //Dohvati vrijeme iz konfiguracijske datoteke.
+                scheduledTime =
+                DateTime.Parse(System.Configuration.ConfigurationManager.AppSettings["ScheduledTime"]);
+                if (DateTime.Now > scheduledTime)
+                {
+                    //Ukoliko je termin prošao, dodaj 1 dan.
+                    scheduledTime = scheduledTime.AddDays(1);
+                }
+            }
+            if (mode.ToUpper() == "INTERVAL")
+            {
+                // Dohvati vrijeme iz konfiguracijske datoteke
+                int intervalMinutes =
+                Convert.ToInt32(ConfigurationManager.AppSettings["IntervalMinutes"]);
+                //Postavi zakazano vrijeme za jednu minutu od trenutnog vremena.
+                scheduledTime = DateTime.Now.AddMinutes(intervalMinutes);
+                if (DateTime.Now > scheduledTime)
+                {
+                    //Ukoliko je termin prošao, dodaj 1 minutu.
+                    scheduledTime = scheduledTime.AddMinutes(intervalMinutes);
+                }
+            }
+            // Vremenski interval
+            TimeSpan timeSpan = scheduledTime.Subtract(DateTime.Now);
+            string schedule = string.Format("{0} day(s) {1} hour(s) {2} minute(s) {3}seconds(s)", timeSpan.Days, timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+            //Razlika između trenutnog vremena i planiranog vremena
+            int dueTime = Convert.ToInt32(timeSpan.TotalMilliseconds);
+            // Promjena vremena izvršavanja metode povratnog poziva.
+            Schedular.Change(dueTime, Timeout.Infinite);
+        }
+        private void SchedularCallback(object e)
+        {
+            lFlights = Rest.GetFlights();
+            gMapAirTraffic.Refresh();
+            SetFlightsOnMap();
+            gMapAirTraffic.Refresh();
+            ScheduleService();
+        }*/
     }
 }

@@ -99,11 +99,11 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Location = new System.Drawing.Point(22, 44);
+            this.tabControl1.Location = new System.Drawing.Point(12, 40);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(858, 365);
@@ -157,7 +157,7 @@
             this.gMapAirTraffic.Location = new System.Drawing.Point(6, 6);
             this.gMapAirTraffic.MarkersEnabled = true;
             this.gMapAirTraffic.MaxZoom = 18;
-            this.gMapAirTraffic.MinZoom = 2;
+            this.gMapAirTraffic.MinZoom = 0;
             this.gMapAirTraffic.MouseWheelZoomEnabled = true;
             this.gMapAirTraffic.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             this.gMapAirTraffic.Name = "gMapAirTraffic";
@@ -168,9 +168,9 @@
             this.gMapAirTraffic.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapAirTraffic.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapAirTraffic.ShowTileGridLines = false;
-            this.gMapAirTraffic.Size = new System.Drawing.Size(838, 330);
+            this.gMapAirTraffic.Size = new System.Drawing.Size(844, 330);
             this.gMapAirTraffic.TabIndex = 0;
-            this.gMapAirTraffic.Zoom = 13D;
+            this.gMapAirTraffic.Zoom = 1D;
             this.gMapAirTraffic.Load += new System.EventHandler(this.gMapAirTraffic_Load);
             // 
             // tabPage3
