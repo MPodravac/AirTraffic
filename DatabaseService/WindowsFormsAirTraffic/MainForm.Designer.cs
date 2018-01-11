@@ -35,10 +35,10 @@
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.dataGridViewFlights = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gMapAirTraffic = new GMap.NET.WindowsForms.GMapControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridViewFlights = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridViewCountries = new System.Windows.Forms.DataGridView();
@@ -49,9 +49,9 @@
             this.comboBoxCountries = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).BeginInit();
-            this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).BeginInit();
             this.SuspendLayout();
@@ -109,29 +109,6 @@
             this.tabControl1.Size = new System.Drawing.Size(858, 365);
             this.tabControl1.TabIndex = 2;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.dataGridViewFlights);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(850, 339);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Live AirTraffic (table)";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewFlights
-            // 
-            this.dataGridViewFlights.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewFlights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewFlights.Location = new System.Drawing.Point(61, 25);
-            this.dataGridViewFlights.Name = "dataGridViewFlights";
-            this.dataGridViewFlights.Size = new System.Drawing.Size(783, 308);
-            this.dataGridViewFlights.TabIndex = 0;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.gMapAirTraffic);
@@ -170,8 +147,31 @@
             this.gMapAirTraffic.ShowTileGridLines = false;
             this.gMapAirTraffic.Size = new System.Drawing.Size(844, 330);
             this.gMapAirTraffic.TabIndex = 0;
-            this.gMapAirTraffic.Zoom = 1D;
+            this.gMapAirTraffic.Zoom = 3D;
             this.gMapAirTraffic.Load += new System.EventHandler(this.gMapAirTraffic_Load);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dataGridViewFlights);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(850, 339);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Live AirTraffic (table)";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewFlights
+            // 
+            this.dataGridViewFlights.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewFlights.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewFlights.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFlights.Location = new System.Drawing.Point(61, 25);
+            this.dataGridViewFlights.Name = "dataGridViewFlights";
+            this.dataGridViewFlights.Size = new System.Drawing.Size(783, 308);
+            this.dataGridViewFlights.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -265,9 +265,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();
-            this.tabPage2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).EndInit();
