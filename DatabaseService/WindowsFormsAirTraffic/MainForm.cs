@@ -24,7 +24,8 @@ namespace WindowsFormsAirTraffic
     public partial class MainForm : Form
     {
         public List<String> lCountries;
-        public List<Flight> lFlights;
+        public List<Flight> lCurrentFlights;
+        public List<Flight> lPastFlights;
         public List<Country> lAvCountries;
         Rest Rest = new Rest();
         Crud Crud = new Crud();
@@ -39,7 +40,7 @@ namespace WindowsFormsAirTraffic
             dataGridViewCountries.DataSource = lAvCountries;
 
             //DATA GRID LETOVI
-            lFlights = Rest.GetFlights();
+            lCurrentFlights = Rest.GetFlights();
             dataGridViewFlights.DataSource = Rest.GetFlights();
 
             lCountries = Rest.GetAllCountries();
@@ -107,7 +108,7 @@ namespace WindowsFormsAirTraffic
 
         private void gMapAirTraffic_Load(object sender, EventArgs e)
         {
-            lFlights = Rest.GetFlights();
+            //lCurrentFlights = Rest.GetFlights();
 
             gMapAirTraffic.MapProvider = GMap.NET.MapProviders.GoogleHybridMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
@@ -125,21 +126,51 @@ namespace WindowsFormsAirTraffic
 
         private void SetFlightsOnMap()
         {
-            lFlights = Rest.GetFlights();
-            //GMapOverlay existingmarkers = gMapAirTraffic.;
+            lPastFlights = lCurrentFlights.ToList();
+            lCurrentFlights.Clear();
+            lCurrentFlights = Rest.GetFlights();
             gMapAirTraffic.Overlays.Clear();
             GMapOverlay markers = new GMapOverlay("markers");
             GMarkerGoogle marker;
-            //gMapAirTraffic.Overlays.Remove(markers);
-            for (int i = 0; i < lFlights.Count; i++)
+            for (int i = 0; i < lCurrentFlights.Count; i++)
+            {
+                if(lCurrentFlights[i].fHeading >= 0 && lCurrentFlights[i].fHeading <= 90)
+                {
+                    marker = new GMarkerGoogle(
+                    new PointLatLng(lCurrentFlights[i].fLatitude, lCurrentFlights[i].fLongitude),
+                    new Bitmap("plane0-90.png"));
+                    markers.Markers.Add(marker);
+                }
+                if (lCurrentFlights[i].fHeading >= 90 && lCurrentFlights[i].fHeading <= 180)
+                {
+                    marker = new GMarkerGoogle(
+                    new PointLatLng(lCurrentFlights[i].fLatitude, lCurrentFlights[i].fLongitude),
+                    new Bitmap("plane90-180.png"));
+                    markers.Markers.Add(marker);
+                }
+                if (lCurrentFlights[i].fHeading >= 180 && lCurrentFlights[i].fHeading <= 270)
+                {
+                    marker = new GMarkerGoogle(
+                    new PointLatLng(lCurrentFlights[i].fLatitude, lCurrentFlights[i].fLongitude),
+                    new Bitmap("plane180-270.png"));
+                    markers.Markers.Add(marker);
+                }
+                if (lCurrentFlights[i].fHeading >= 270 && lCurrentFlights[i].fHeading == 360)
+                {
+                    marker = new GMarkerGoogle(
+                    new PointLatLng(lCurrentFlights[i].fLatitude, lCurrentFlights[i].fLongitude),
+                    new Bitmap("plane270-360.png"));
+                    markers.Markers.Add(marker);
+                }
+            }
+            for(int j = 0; j < lPastFlights.Count; j++)
             {
                 marker = new GMarkerGoogle(
-                new PointLatLng(lFlights[i].fLatitude, lFlights[i].fLongitude),
-                new Bitmap("plane.png"));
+                    new PointLatLng(lPastFlights[j].fLatitude, lPastFlights[j].fLongitude),
+                    new Bitmap("dot-circle.png"));
                 markers.Markers.Add(marker);
             }
             gMapAirTraffic.Overlays.Add(markers);
-         
         }
 
          public void ScheduleService()
