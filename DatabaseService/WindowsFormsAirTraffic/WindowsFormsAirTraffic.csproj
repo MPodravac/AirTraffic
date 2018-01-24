@@ -83,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -111,6 +112,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="airline-routes-with-planes-on-white-background-seamless-pattern-.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="dot-circle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

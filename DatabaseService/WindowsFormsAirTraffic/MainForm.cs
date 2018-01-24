@@ -130,13 +130,13 @@ namespace WindowsFormsAirTraffic
         {
             /*Debug.WriteLine("broj letova");
             Debug.WriteLine(lCurrentFlightsMap.Count);*/
-            if(lCurrentFlightsMap.Count > 0)
+            /*if(lCurrentFlightsMap.Count > 0)
             {
                 lPastFlights.AddRange(lCurrentFlightsMap);
             }
             
             lPastFlights = lCurrentFlightsMap.ToList();
-            lCurrentFlightsMap.Clear();
+            lCurrentFlightsMap.Clear();*/
             lCurrentFlightsMap = Rest.GetFlights();
             gMapAirTraffic.Overlays.Clear();
             GMapOverlay markers = new GMapOverlay("markers");
@@ -172,7 +172,7 @@ namespace WindowsFormsAirTraffic
                     markers.Markers.Add(marker);
                 }
             }
-            if(lPastFlights.Count > 0)
+            /*if(lPastFlights.Count > 0)
             {
                 for (int j = 0; j < lPastFlights.Count; j++)
                 {
@@ -181,7 +181,7 @@ namespace WindowsFormsAirTraffic
                         new Bitmap("dot-circle.png"));
                     markers.Markers.Add(marker);
                 }
-            }
+            }*/
             gMapAirTraffic.Overlays.Add(markers);
         }
 
