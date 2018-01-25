@@ -40,6 +40,8 @@ namespace WindowsFormsAirTraffic
             //DATA GRID DRŽAVE
             lAvCountries = Crud.GetAvailableCountries();
             dataGridViewCountries.DataSource = lAvCountries;
+            //dataGridViewCountries.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridViewCountries.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             //DATA GRID LETOVI
             lCurrentFlightsDatagrid = Rest.GetFlights();
