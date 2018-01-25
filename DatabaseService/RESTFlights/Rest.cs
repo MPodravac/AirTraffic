@@ -28,7 +28,7 @@ namespace RESTFlights
             return result;
         }
 
-        public List<Flight> GetFlights()
+        public List<Flight> GetFlights(string sCountry)
         {
             Crud Crud = new Crud();
             List<Country> lCountries;

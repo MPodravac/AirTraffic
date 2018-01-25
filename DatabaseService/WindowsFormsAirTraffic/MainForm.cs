@@ -47,7 +47,7 @@ namespace WindowsFormsAirTraffic
 
             lCountries = Rest.GetAllCountries();
             List<String> lAllCountries = lCountries.ToList();
-            lAllCountries.Insert(0, "Sve države");
+            lAllCountries.Insert(0, "All countries");
 
             comboBoxCountries.DataSource = lAllCountries;
 
@@ -137,6 +137,7 @@ namespace WindowsFormsAirTraffic
             
             lPastFlights = lCurrentFlightsMap.ToList();
             lCurrentFlightsMap.Clear();*/
+
             lCurrentFlightsMap = Rest.GetFlights();
             gMapAirTraffic.Overlays.Clear();
             GMapOverlay markers = new GMapOverlay("markers");
