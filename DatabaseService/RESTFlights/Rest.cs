@@ -105,9 +105,9 @@ namespace RESTFlights
 
         public List<String>GetAllCountries()
         {
-            /*Crud Crud = new Crud();
+            Crud Crud = new Crud();
             List<Country> lBaseCountries;
-            lBaseCountries = Crud.GetAvailableCountries();*/
+            lBaseCountries = Crud.GetAvailableCountries();
 
             string sName;
             List<String> lAllCountries = new List<String>();
@@ -120,7 +120,7 @@ namespace RESTFlights
                 string name = (string)item.GetValue("name");
                 lAllCountries.Add(sName = name);
             }
-            /*for(int i=0; i<lBaseCountries.Count; i++)
+            for(int i=0; i<lBaseCountries.Count; i++)
             {
                 for(int j=0; j<lAllCountries.Count;j++)
                 {
@@ -129,7 +129,7 @@ namespace RESTFlights
                         lAllCountries.Remove(lBaseCountries[i].sCountryName);
                     }
                 }
-            }*/
+            }
             return lAllCountries;
         }
     }

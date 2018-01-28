@@ -51,6 +51,7 @@ namespace WindowsFormsAirTraffic
             lCurrentFlightsDatagrid = Rest.GetFlights(sPretragaDrzave);
             dataGridViewFlights.DataSource = Rest.GetFlights(sPretragaDrzave);
 
+            //COMBOBOX DRŽAVE
             lCountries = Rest.GetAllCountries();
             List<String> lAllCountries = lCountries.ToList();
             lAllCountries.Insert(0, "All countries");
@@ -73,7 +74,7 @@ namespace WindowsFormsAirTraffic
 
             string sCountry = (string)comboBoxCountries.SelectedItem;
 
-            if (sCountry != "Sve države")
+            if (sCountry != "All countries")
             {
                 lCountries = lCountries.ToList();
             }
@@ -113,6 +114,7 @@ namespace WindowsFormsAirTraffic
                 Crud.DeleteCountry(oCountry);
             }
             dataGridViewCountries.DataSource = Crud.GetAvailableCountries();
+            comboBoxCountries.DataSource = Rest.GetAllCountries();
         }
 
         private void gMapAirTraffic_Load(object sender, EventArgs e)
@@ -232,13 +234,5 @@ namespace WindowsFormsAirTraffic
             string sPretragaLeta = inptPretraziLetove.Text;
             SetFlightsOnMap();
         }
-
-        /*private void btnSearchFlights_Click(object sender, EventArgs e)
-        {
-            string sPretragaLeta = inptPretraziLetove.Text;
-            var vPretraga = from c in lCurrentFlightsMap where c.sCountry.Contains(sPretragaLeta) select c;
-            List<Flight> lSearchedFlights = vPretraga.ToList();
-            
-        }*/
     }
 }
