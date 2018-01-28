@@ -36,10 +36,14 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridViewCountries = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddCountry = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxCountries = new System.Windows.Forms.ComboBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnPretrazi = new System.Windows.Forms.Button();
+            this.inptPretraziDrzave = new System.Windows.Forms.TextBox();
             this.dataGridViewFlights = new System.Windows.Forms.DataGridView();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,10 +62,10 @@
             this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.inptPretraziLetove = new System.Windows.Forms.TextBox();
             this.gMapAirTraffic = new GMap.NET.WindowsForms.GMapControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).BeginInit();
@@ -94,7 +98,7 @@
             // izlazIzProgramaToolStripMenuItem
             // 
             this.izlazIzProgramaToolStripMenuItem.Name = "izlazIzProgramaToolStripMenuItem";
-            this.izlazIzProgramaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.izlazIzProgramaToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.izlazIzProgramaToolStripMenuItem.Text = "Exit";
             this.izlazIzProgramaToolStripMenuItem.Click += new System.EventHandler(this.izlazIzProgramaToolStripMenuItem_Click);
             // 
@@ -129,15 +133,28 @@
             // 
             this.dataGridViewCountries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridViewCountries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCountries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCountries.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
             this.dataGridViewCountries.Location = new System.Drawing.Point(377, 39);
             this.dataGridViewCountries.Name = "dataGridViewCountries";
-            this.dataGridViewCountries.Size = new System.Drawing.Size(279, 51);
-            this.dataGridViewCountries.TabIndex = 4;
+            this.dataGridViewCountries.Size = new System.Drawing.Size(214, 24);
+            this.dataGridViewCountries.TabIndex = 0;
             this.dataGridViewCountries.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCountries_CellContentClick);
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "nCountryID";
+            this.Column1.HeaderText = "Country ID";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "sCountryName";
+            this.Column2.HeaderText = "Country";
+            this.Column2.Name = "Column2";
             // 
             // btnAddCountry
             // 
@@ -173,14 +190,34 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnPretrazi);
+            this.tabPage1.Controls.Add(this.inptPretraziDrzave);
             this.tabPage1.Controls.Add(this.dataGridViewFlights);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(916, 351);
+            this.tabPage1.Size = new System.Drawing.Size(916, 349);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Live AirTraffic (table)";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnPretrazi
+            // 
+            this.btnPretrazi.Location = new System.Drawing.Point(132, 3);
+            this.btnPretrazi.Name = "btnPretrazi";
+            this.btnPretrazi.Size = new System.Drawing.Size(75, 20);
+            this.btnPretrazi.TabIndex = 2;
+            this.btnPretrazi.Text = "Search";
+            this.btnPretrazi.UseVisualStyleBackColor = true;
+            this.btnPretrazi.Click += new System.EventHandler(this.btnPretrazi_Click);
+            // 
+            // inptPretraziDrzave
+            // 
+            this.inptPretraziDrzave.Location = new System.Drawing.Point(26, 3);
+            this.inptPretraziDrzave.Name = "inptPretraziDrzave";
+            this.inptPretraziDrzave.Size = new System.Drawing.Size(100, 20);
+            this.inptPretraziDrzave.TabIndex = 1;
+            this.inptPretraziDrzave.Text = "All countries";
             // 
             // dataGridViewFlights
             // 
@@ -206,9 +243,9 @@
             this.Column16,
             this.Column17,
             this.Column18});
-            this.dataGridViewFlights.Location = new System.Drawing.Point(26, 15);
+            this.dataGridViewFlights.Location = new System.Drawing.Point(26, 28);
             this.dataGridViewFlights.Name = "dataGridViewFlights";
-            this.dataGridViewFlights.Size = new System.Drawing.Size(849, 320);
+            this.dataGridViewFlights.Size = new System.Drawing.Size(849, 307);
             this.dataGridViewFlights.TabIndex = 0;
             // 
             // Column3
@@ -309,6 +346,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnSearch);
+            this.tabPage2.Controls.Add(this.inptPretraziLetove);
             this.tabPage2.Controls.Add(this.gMapAirTraffic);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -317,6 +356,24 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "History AirTraffic (geo)";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(137, 6);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 20);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // inptPretraziLetove
+            // 
+            this.inptPretraziLetove.Location = new System.Drawing.Point(6, 6);
+            this.inptPretraziLetove.Name = "inptPretraziLetove";
+            this.inptPretraziLetove.Size = new System.Drawing.Size(125, 20);
+            this.inptPretraziLetove.TabIndex = 1;
+            this.inptPretraziLetove.Text = "All countries";
             // 
             // gMapAirTraffic
             // 
@@ -362,19 +419,6 @@
             this.tabControl1.Size = new System.Drawing.Size(924, 375);
             this.tabControl1.TabIndex = 2;
             // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "nCountryID";
-            this.Column1.HeaderText = "Country ID";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 101;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "sCountryName";
-            this.Column2.HeaderText = "Country";
-            this.Column2.Name = "Column2";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,8 +436,10 @@
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountries)).EndInit();
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlights)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -435,6 +481,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.TextBox inptPretraziLetove;
+        private System.Windows.Forms.TextBox inptPretraziDrzave;
+        private System.Windows.Forms.Button btnPretrazi;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
 

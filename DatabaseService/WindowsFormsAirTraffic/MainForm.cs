@@ -29,6 +29,8 @@ namespace WindowsFormsAirTraffic
         public List<Flight> lCurrentFlightsDatagrid;
         public List<Flight> lPastFlights;
         public List<Country> lAvCountries;
+        public GMapOverlay markers;
+
         Rest Rest = new Rest();
         Crud Crud = new Crud();
 
@@ -37,15 +39,17 @@ namespace WindowsFormsAirTraffic
             InitializeComponent();
             WindowState = FormWindowState.Maximized;
 
+            string sPretragaDrzave = inptPretraziDrzave.Text;
+
             //DATA GRID DRŽAVE
+            dataGridViewCountries.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dataGridViewCountries.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             lAvCountries = Crud.GetAvailableCountries();
             dataGridViewCountries.DataSource = lAvCountries;
-            //dataGridViewCountries.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            //dataGridViewCountries.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             //DATA GRID LETOVI
-            lCurrentFlightsDatagrid = Rest.GetFlights();
-            dataGridViewFlights.DataSource = Rest.GetFlights();
+            lCurrentFlightsDatagrid = Rest.GetFlights(sPretragaDrzave);
+            dataGridViewFlights.DataSource = Rest.GetFlights(sPretragaDrzave);
 
             lCountries = Rest.GetAllCountries();
             List<String> lAllCountries = lCountries.ToList();
@@ -65,9 +69,10 @@ namespace WindowsFormsAirTraffic
 
         private void comboBoxCountries_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lCountries = Rest.GetAllCountries();
+
             string sCountry = (string)comboBoxCountries.SelectedItem;
 
-            lCountries = Rest.GetAllCountries();
             if (sCountry != "Sve države")
             {
                 lCountries = lCountries.ToList();
@@ -112,8 +117,6 @@ namespace WindowsFormsAirTraffic
 
         private void gMapAirTraffic_Load(object sender, EventArgs e)
         {
-            //lCurrentFlights = Rest.GetFlights();
-
             gMapAirTraffic.MapProvider = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerOnly;
             gMapAirTraffic.ShowCenter = false;
@@ -128,21 +131,29 @@ namespace WindowsFormsAirTraffic
             MessageBox.Show("Created by Mateja Podravac" + Environment.NewLine + "VSMTI, 2017.");
         }
 
+        public bool ControlInvokeRequired(Control c, Action a)
+        {
+            if (c.InvokeRequired) c.Invoke(new MethodInvoker(delegate { a(); }));
+            else return false;
+
+            return true;
+        }
+
         private void SetFlightsOnMap()
         {
-            /*Debug.WriteLine("broj letova");
-            Debug.WriteLine(lCurrentFlightsMap.Count);*/
-            /*if(lCurrentFlightsMap.Count > 0)
-            {
-                lPastFlights.AddRange(lCurrentFlightsMap);
-            }
-            
-            lPastFlights = lCurrentFlightsMap.ToList();
-            lCurrentFlightsMap.Clear();*/
+            string sPretragaLeta = inptPretraziLetove.Text;
 
-            lCurrentFlightsMap = Rest.GetFlights();
+            if (ControlInvokeRequired(gMapAirTraffic, () => SetFlightsOnMap())) return;
             gMapAirTraffic.Overlays.Clear();
-            GMapOverlay markers = new GMapOverlay("markers");
+
+            if (!(markers is GMapOverlay))
+            {
+                markers = new GMapOverlay("markers");
+            }
+
+            lCurrentFlightsMap = Rest.GetFlights(sPretragaLeta);
+            markers.Clear();
+
             GMarkerGoogle marker;
             for (int i = 0; i < lCurrentFlightsMap.Count; i++)
             {
@@ -175,16 +186,6 @@ namespace WindowsFormsAirTraffic
                     markers.Markers.Add(marker);
                 }
             }
-            /*if(lPastFlights.Count > 0)
-            {
-                for (int j = 0; j < lPastFlights.Count; j++)
-                {
-                    marker = new GMarkerGoogle(
-                        new PointLatLng(lPastFlights[j].fLatitude, lPastFlights[j].fLongitude),
-                        new Bitmap("dot-circle.png"));
-                    markers.Markers.Add(marker);
-                }
-            }*/
             gMapAirTraffic.Overlays.Add(markers);
         }
 
@@ -199,7 +200,7 @@ namespace WindowsFormsAirTraffic
              float intervalMinutes =
              Convert.ToSingle(ConfigurationManager.AppSettings["IntervalMinutes"]);
             //Postavi zakazano vrijeme za jednu minutu od trenutnog vremena.
-            scheduledTime = DateTime.Now.AddSeconds(10);
+            scheduledTime = DateTime.Now.AddSeconds(5);
              if (DateTime.Now > scheduledTime)
                  {
                      //Ukoliko je termin prošao, dodaj 1 minutu.
@@ -216,8 +217,28 @@ namespace WindowsFormsAirTraffic
          private void SchedularCallback(object e)
          {
              SetFlightsOnMap();
-             gMapAirTraffic.ReloadMap();
              ScheduleService();
         }
+
+        private void btnPretrazi_Click(object sender, EventArgs e)
+        {
+            string sPretragaDrzave = inptPretraziDrzave.Text;
+            lCurrentFlightsDatagrid = Rest.GetFlights(sPretragaDrzave);
+            dataGridViewFlights.DataSource = Rest.GetFlights(sPretragaDrzave);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string sPretragaLeta = inptPretraziLetove.Text;
+            SetFlightsOnMap();
+        }
+
+        /*private void btnSearchFlights_Click(object sender, EventArgs e)
+        {
+            string sPretragaLeta = inptPretraziLetove.Text;
+            var vPretraga = from c in lCurrentFlightsMap where c.sCountry.Contains(sPretragaLeta) select c;
+            List<Flight> lSearchedFlights = vPretraga.ToList();
+            
+        }*/
     }
 }
