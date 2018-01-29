@@ -27,7 +27,6 @@ namespace WindowsFormsAirTraffic
         public List<String> lCountries;
         public List<Flight> lCurrentFlightsMap = new List<Flight>();
         public List<Flight> lCurrentFlightsDatagrid;
-        public List<Flight> lPastFlights;
         public List<Country> lAvCountries;
         public GMapOverlay markers;
 
