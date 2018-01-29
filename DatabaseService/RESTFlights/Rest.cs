@@ -41,7 +41,7 @@ namespace RESTFlights
             JObject json = JObject.Parse(sJson);
             var oFlights = json["states"].ToList();
 
-            if(country == "All countries")
+            if(country == "All countries" || String.IsNullOrEmpty(country))
             {
                 for (int i = 0; i < oFlights.Count; i++)
                 {

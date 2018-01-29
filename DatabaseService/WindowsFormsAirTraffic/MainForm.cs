@@ -197,16 +197,8 @@ namespace WindowsFormsAirTraffic
              // Postavljanje vremena 'po defaultu'
              DateTime scheduledTime = DateTime.MinValue;
              
-             // Dohvati vrijeme iz konfiguracijske datoteke
-             float intervalMinutes =
-             Convert.ToSingle(ConfigurationManager.AppSettings["IntervalMinutes"]);
-            //Postavi zakazano vrijeme za jednu minutu od trenutnog vremena.
-            scheduledTime = DateTime.Now.AddSeconds(5);
-             if (DateTime.Now > scheduledTime)
-                 {
-                     //Ukoliko je termin prošao, dodaj 1 minutu.
-                     scheduledTime = scheduledTime.AddMinutes(intervalMinutes);
-                 }
+            //Postavi zakazano vrijeme za pet sekundi od trenutnog vremena.
+            scheduledTime = DateTime.Now.AddSeconds(2);
        
              // Vremenski interval
              TimeSpan timeSpan = scheduledTime.Subtract(DateTime.Now);
